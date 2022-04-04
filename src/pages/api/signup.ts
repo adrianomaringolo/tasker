@@ -6,7 +6,7 @@ export default handler.post(
     const { username, password1, password2 } = req.body;
 
     const errors: string[] = getFormErrors(username, password1, password2);
-    if (errors.length > 0) return res.status(400).json({ erro: errors });
+    if (errors.length > 0) return res.status(400).json({ error: errors });
   }
 );
 

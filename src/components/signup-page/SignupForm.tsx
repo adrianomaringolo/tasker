@@ -1,12 +1,21 @@
+import Alert from "components/Alert";
 import Button from "components/Button";
 import { LabelAndInput } from "components/Form";
-import React, { useState } from "react";
+import { UserContext } from "contexts/UserContext";
+import { useRouter } from "next/router";
+import React, { useContext, useState } from "react";
+import { harperFetchJWTTokens } from "utils/harperdb/fetchJWTTokens";
 import { postFormData } from "utils/postFormData";
 
 const SignupForm = () => {
+  const user = useContext(UserContext);
+  const router = useRouter();
+
   const [username, setUsername] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
+
+  const [errors, setErrors] = useState<string | string[]>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,7 +23,46 @@ const SignupForm = () => {
     const formData = { username, password1, password2 };
     const { response, result } = await postFormData(formData, "/api/signup");
 
-    console.log({ response, result });
+    if (response.status !== 200) {
+      setErrors(result.error);
+      return;
+    }
+
+    try {
+      const { response, result } = await harperFetchJWTTokens(
+        username,
+        password1
+      );
+
+      const accessToken = result.operation_token;
+      if (response.status === 200 && accessToken) {
+        authenticateUser(username, accessToken);
+      } else {
+        router.push("/login");
+      }
+    } catch (err) {
+      console.error(err);
+      setErrors("Whoops, something went wrong :(");
+    }
+  };
+
+  const authenticateUser = (username: string, accessToken: string) => {
+    user.setUsername(username);
+    localStorage.setItem("access_token", accessToken);
+  };
+
+  const displayErrors = () => {
+    if (errors.length === 0) return <></>;
+
+    return typeof errors === "string" ? (
+      <Alert type="danger">{errors}</Alert>
+    ) : (
+      errors.map((err, i) => (
+        <Alert key={i} type="danger">
+          {err}
+        </Alert>
+      ))
+    );
   };
 
   return (
@@ -47,6 +95,8 @@ const SignupForm = () => {
       >
         Create account
       </Button>
+
+      {displayErrors()}
     </form>
   );
 };

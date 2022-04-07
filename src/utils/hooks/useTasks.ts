@@ -11,7 +11,7 @@ export const useTasks = (username: string) => {
         const tasks: Task[] = await harperGetTasks(username);
         setTasks(tasks);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     },
     [setTasks]

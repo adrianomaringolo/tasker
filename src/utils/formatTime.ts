@@ -38,3 +38,15 @@ const calculateMins = (seconds: number) =>
 
 const calculateSecs = (seconds: number) =>
   Math.floor((seconds % SECONDS_PER_HOUR) % SECONDS_PER_MINUTE);
+
+export const displayTimeString = (seconds: number) => {
+  const { formattedHours, formattedMins, formattedSecs } = formatTime(seconds);
+  return `${formattedHours}h ${formattedMins}m ${formattedSecs}s`;
+};
+
+// timestamp => dd/mm/yyyy
+export const timestampToDayMonthYear = (timestamp: number) => {
+  const date = new Date(timestamp);
+  const formattedDate = date.toLocaleDateString();
+  return formattedDate;
+};

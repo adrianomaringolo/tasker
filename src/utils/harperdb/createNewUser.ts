@@ -7,7 +7,7 @@ export const harperCreateNewUser = async (
   const DB_PW = process.env.HARPERDB_PW;
 
   if (!DB_URL || !DB_PW) {
-    console.log("Error: .env variables are undefined");
+    console.error("Error: .env variables are undefined");
     throw "Internal server error";
   }
   const myHeaders = new Headers();

@@ -10,7 +10,6 @@ import Image from "next/image";
 import { useContext, useState } from "react";
 import { RecentTaskTime } from "types/RecentTaskTime";
 import useTimer from "utils/hooks/useTimer";
-import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   const [selectedTaskId, setSelectedTaskId] = useState("");
@@ -23,40 +22,47 @@ const Home: NextPage = () => {
   const { username } = useContext(UserContext);
 
   return (
-    <div className="flex flex-col items-center justify-center pt-4 grow">
-      {!username && (
-        <Alert type="warning" extraClasses="mb-12">
-          Please <Link href="/login">log in</Link> or{" "}
-          <Link href="/signup">create an account</Link> to use Super
-          Productivity Timer
-        </Alert>
-      )}
-      <Taskbar
-        selectedTaskId={selectedTaskId}
-        setSelectedTaskId={setSelectedTaskId}
-        setSelectedTaskName={setSelectedTaskName}
-        setErrorMessage={setErrorMessage}
-        setSeconds={setSeconds}
-        pauseTimer={pauseTimer}
-      />
-      <Timer
-        seconds={seconds}
-        setSeconds={setSeconds}
-        setRecentTaskTimes={setRecentTaskTimes}
-        selectedTaskName={selectedTaskName}
-        isTimerOn={isTimerOn}
-        startTimer={startTimer}
-        pauseTimer={pauseTimer}
-        setErrorMessage={setErrorMessage}
-        selectedTaskId={selectedTaskId}
-      />
+    <>
+      <Head>
+        <title>Tasker</title>
+      </Head>
+      <div className="flex flex-col items-center justify-center pt-4 grow">
+        {!username && (
+          <Alert type="warning" extraClasses="mb-12">
+            Please <Link href="/login">log in</Link> or{" "}
+            <Link href="/signup">create an account</Link> to use Super
+            Productivity Timer
+          </Alert>
+        )}
+        <Taskbar
+          selectedTaskId={selectedTaskId}
+          setSelectedTaskId={setSelectedTaskId}
+          setSelectedTaskName={setSelectedTaskName}
+          setErrorMessage={setErrorMessage}
+          setSeconds={setSeconds}
+          pauseTimer={pauseTimer}
+        />
+        <Timer
+          seconds={seconds}
+          setSeconds={setSeconds}
+          setRecentTaskTimes={setRecentTaskTimes}
+          selectedTaskName={selectedTaskName}
+          isTimerOn={isTimerOn}
+          startTimer={startTimer}
+          pauseTimer={pauseTimer}
+          setErrorMessage={setErrorMessage}
+          selectedTaskId={selectedTaskId}
+        />
 
-      {errorMessage && <div className="text-red-500 mt-4">{errorMessage}</div>}
+        {errorMessage && (
+          <div className="text-red-500 mt-4">{errorMessage}</div>
+        )}
 
-      {recentTaskTimes.length > 0 && (
-        <LogOfRecentTasks recentTasks={recentTaskTimes} />
-      )}
-    </div>
+        {recentTaskTimes.length > 0 && (
+          <LogOfRecentTasks recentTasks={recentTaskTimes} />
+        )}
+      </div>
+    </>
   );
 };
 

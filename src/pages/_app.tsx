@@ -11,8 +11,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { username, setUsername } = useUser();
   const { tasks, setTasks, getTasks } = useTasks(username);
 
-  console.log(tasks);
-
   return (
     <UserContext.Provider value={{ username, setUsername }}>
       <TasksContext.Provider value={{ tasks, setTasks, getTasks }}>

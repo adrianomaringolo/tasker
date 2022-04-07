@@ -23,7 +23,7 @@ export const harperGetUsername = async (accessToken: string) => {
       return result.username;
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
   return null;
 };

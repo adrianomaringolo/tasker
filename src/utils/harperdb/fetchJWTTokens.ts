@@ -5,7 +5,7 @@ export const harperFetchJWTTokens = async (
   password: string
 ) => {
   if (!DB_URL) {
-    console.log("Error: DB_URL undefined");
+    console.error("Error: DB_URL undefined");
     throw "Internal server error";
   }
 

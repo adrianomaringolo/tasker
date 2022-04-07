@@ -72,7 +72,6 @@ export const Timer: React.FC<TimerProps> = ({
     } else {
       setErrorMessage("Whoops, something went wrong :(");
     }
-    console.log({ response, result });
   };
 
   const handleResetTimer = () => {

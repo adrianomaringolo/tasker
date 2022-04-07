@@ -36,7 +36,7 @@ const LoginForm = () => {
         setError("Whoops, something went wrong :(");
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setError("Whoops, something went wrong :(");
     }
   };

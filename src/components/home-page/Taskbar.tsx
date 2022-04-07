@@ -51,7 +51,7 @@ const Taskbar = ({
         setErrorMessage("Whoops, something went wrong");
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setErrorMessage("Whoops, something went wrong");
     }
   };

@@ -5,7 +5,7 @@ import { harperGetTasks } from "utils/harperdb/getTasks";
 export const useTasks = (username: string) => {
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  const getAndSetTasks = useCallback(
+  const getTasks = useCallback(
     async (username: string) => {
       try {
         const tasks: Task[] = await harperGetTasks(username);
@@ -19,8 +19,8 @@ export const useTasks = (username: string) => {
 
   useEffect(() => {
     if (!username || tasks.length > 0) return;
-    getAndSetTasks(username);
-  }, [username, tasks.length, getAndSetTasks]);
+    getTasks(username);
+  }, [username, tasks.length, getTasks]);
 
-  return { tasks, setTasks, getAndSetTasks };
+  return { tasks, setTasks, getTasks };
 };

@@ -9,13 +9,13 @@ import { TasksContext } from "contexts/TasksContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { username, setUsername } = useUser();
-  const { tasks, setTasks, getAndSetTasks } = useTasks(username);
+  const { tasks, setTasks, getTasks } = useTasks(username);
 
   console.log(tasks);
 
   return (
     <UserContext.Provider value={{ username, setUsername }}>
-      <TasksContext.Provider value={{ tasks, setTasks, getAndSetTasks }}>
+      <TasksContext.Provider value={{ tasks, setTasks, getTasks }}>
         <Layout>
           <Component {...pageProps} />
         </Layout>

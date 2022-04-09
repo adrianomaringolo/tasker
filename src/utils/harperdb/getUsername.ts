@@ -1,6 +1,6 @@
-import { DB_URL } from "constants/constants";
-
 export const harperGetUsername = async (accessToken: string) => {
+  const DB_URL = process.env.NEXT_PUBLIC_HARPERDB_URL;
+
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("Authorization", "Bearer " + accessToken);

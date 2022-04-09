@@ -1,10 +1,9 @@
-import { DB_URL } from "constants/constants";
-
 export const harperCreateNewUser = async (
   username: string,
   password: string
 ) => {
   const DB_PW = process.env.HARPERDB_PW;
+  const DB_URL = process.env.NEXT_PUBLIC_HARPERDB_URL;
 
   if (!DB_URL || !DB_PW) {
     console.error("Error: .env variables are undefined");

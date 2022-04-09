@@ -2,7 +2,7 @@ export const harperFetchJWTTokens = async (
   username: string,
   password: string
 ) => {
-  const DB_URL = process.env.NEXT_PUBLIC_HARPERDB_URL;
+  const DB_URL = process.env.NEXT_PUBLIC_HARPERDB_URL || "";
 
   if (!DB_URL) {
     console.error("Error: DB_URL undefined");
